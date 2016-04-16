@@ -6,7 +6,9 @@ enum Shape { Cirlce, Square, Triangle};
 [RequireComponent (typeof (Rigidbody2D))]
 public class BaseCharacter : MonoBehaviour 
 {
-	public const float Speed = 5f;
+	public const float PlayerSpeed = 1.5f;
+	public const float BulletSpeed = 20f;
+
 	protected float movex = 0f;
 	protected float movey = 0f;
 
@@ -16,8 +18,10 @@ public class BaseCharacter : MonoBehaviour
 		rigidBody = this.GetComponent<Rigidbody2D>();
 	}
 
-	void OnTriggerEnter(Collider other)
+	public void Shoot(Vector2 direction)
 	{
-		Debug.Log ("Collision!");
+		Bullet bulletInstance;
+		bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
+		bulletInstance.GetComponent<Rigidbody2D>().velocity = direction.normalized * BulletSpeed;
 	}
 }

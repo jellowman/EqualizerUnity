@@ -12,6 +12,8 @@ public class GameState : MonoBehaviour {
 
 	public int maxEnemyCount = 10;
 
+	public Bullet bulletPrefab;
+
 	[HideInInspector]
 	public int killCount;
 
