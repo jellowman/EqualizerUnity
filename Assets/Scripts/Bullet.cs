@@ -5,13 +5,10 @@ public class Bullet : MonoBehaviour
 {
 	Shape shotFrom;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.gameObject.GetComponent<PlayerCharacter> () == null) {
+			Debug.Log ("Hit");
+			Destroy (this.gameObject);
+		}
 	}
 }
