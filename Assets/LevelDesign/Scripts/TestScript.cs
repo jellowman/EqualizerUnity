@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Main : MonoBehaviour {
+public class TestScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,10 +10,10 @@ public class Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			AudioFlipper.flip ();
+			MapController.flipSong ();
+			foreach (Vector3 spawnpoint in MapController.getSpawnPoints())
+				Debug.Log(spawnpoint);
 		}
-	
 	}
 }
