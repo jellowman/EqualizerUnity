@@ -11,9 +11,11 @@ public class TestScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space)) {
+			
 			MapController.flipSong ();
-			foreach (Vector3 spawnpoint in MapController.getSpawnPoints())
-				Debug.Log(spawnpoint);
+
+			GameObject player = GameObject.Find ("Player");
+			player.GetComponent<PlayerFlip> ().flip ();
 		}
 	}
 }

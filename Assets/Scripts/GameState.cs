@@ -10,7 +10,13 @@ public class GameState : MonoBehaviour {
 
 	public static GameState gameState;
 
+	public GameObject playerblue;
+	public GameObject playergreen;
+	public GameObject playerred;
+
 	public int maxEnemyCount = 10;
+
+	public Bullet bulletPrefab;
 
 	[HideInInspector]
 	public int killCount;
