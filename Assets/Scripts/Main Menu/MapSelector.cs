@@ -3,14 +3,23 @@ using System.Collections;
 
 public class MapSelector : MonoBehaviour 
 {
-	
-	void Start () 
+	public void SelectMap1()
 	{
-	
+		Application.LoadLevel ("MAP1");
 	}
 
-	void Update () 
+	public void SelectMap2()
 	{
-	
+		Application.LoadLevel ("MAP2");
+	}
+
+	public void SelectMap3()
+	{
+		Application.LoadLevel ("MAP3");
+	}
+
+	public void SelectMap4()
+	{
+		//Application.LoadLevel ("MAP4");
 	}
 }
