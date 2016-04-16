@@ -5,9 +5,8 @@ public class Bullet : MonoBehaviour
 {
 	Shape shotFrom;
 
-	void OnCollisionEnter2D(Collision2D coll) {
+	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.GetComponent<PlayerCharacter> () == null) {
-			Debug.Log ("Hit");
 			Destroy (this.gameObject);
 		}
 	}

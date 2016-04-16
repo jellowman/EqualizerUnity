@@ -14,8 +14,14 @@ public class BaseCharacter : MonoBehaviour
 
 	protected Rigidbody2D rigidBody;
 
+	/// <summary>
+	/// The last direction the player was facing
+	/// </summary>
+	public Vector2 lastDirection;
+
  	void Awake() {
 		rigidBody = this.GetComponent<Rigidbody2D>();
+		lastDirection = new Vector2 (1, 0);
 	}
 
 	public void Shoot(Vector2 direction)

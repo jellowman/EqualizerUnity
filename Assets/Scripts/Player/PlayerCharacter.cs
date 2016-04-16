@@ -6,18 +6,22 @@ public class PlayerCharacter : BaseCharacter {
 	string horizontalAxis = "Horizontal_P1";
 	string verticalAxis = "Vertical_P1";
 
+
 	/// <summary>
 	/// This method takes care of movement
 	/// </summary>
 	void FixedUpdate() {
+		 
 		movex = Input.GetAxis (horizontalAxis);
 		movey = Input.GetAxis (verticalAxis);
 
 		rigidBody.velocity = new Vector2 (movex * PlayerSpeed, movey * PlayerSpeed);
 
-		if(Input.GetKey(KeyCode.Space)) {
-			Shoot(new Vector2(movex, movey));
+		if (movex != 0 || movey != 0) {
+			lastDirection = new Vector2 (movex, movey);
 		}
+
+		Shoot(lastDirection);
 	}
 
 	/// <summary>
