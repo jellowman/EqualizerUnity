@@ -14,4 +14,8 @@ public class MapController : MonoBehaviour {
 		person.transform.position = Spawner.spawnpoints [counter];
 		counter = (counter + 1) % Spawner.spawnpoints.Length;
 	}
+
+	public static void jumpTo(int scenenumber) {
+		Application.LoadLevel (scenenumber);
+	}
 }
