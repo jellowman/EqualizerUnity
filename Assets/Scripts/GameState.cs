@@ -14,6 +14,8 @@ public class GameState : MonoBehaviour {
 	public GameObject playergreen;
 	public GameObject playerred;
 
+	public GameObject AI;
+
 	public int maxEnemyCount = 10;
 
 	public Bullet bulletPrefab;

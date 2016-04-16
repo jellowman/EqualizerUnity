@@ -21,7 +21,7 @@ public class PlayerCharacter : BaseCharacter {
 			lastDirection = new Vector2 (movex, movey);
 		}
 
-		Shoot(lastDirection);
+		Shoot();
 	}
 
 	/// <summary>
