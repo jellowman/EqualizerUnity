@@ -16,4 +16,8 @@ public class BaseCharacter : MonoBehaviour
 		rigidBody = this.GetComponent<Rigidbody2D>();
 	}
 
+	void OnTriggerEnter(Collider other)
+	{
+		Debug.Log ("Collision!");
+	}
 }
