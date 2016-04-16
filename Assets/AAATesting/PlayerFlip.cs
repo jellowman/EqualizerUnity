@@ -6,6 +6,6 @@ public class PlayerFlip : MonoBehaviour {
 	GameObject player;
 
 	public void flip() {
-		Instantiate (GameState.playerblue, this.transform.position, this.transform.rotation);
+		//Instantiate (GameState.playerblue, this.transform.position, this.transform.rotation);
 	}
 }
