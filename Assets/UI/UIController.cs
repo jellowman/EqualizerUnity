@@ -75,7 +75,8 @@ public class UIController : MonoBehaviour
         {
             GameObject newSquare = Instantiate(squareImage);
             newSquare.transform.SetParent(this.gameObject.transform);
-            newSquare.transform.localPosition = new Vector3(i + 0.5f , 0.6f);
+            newSquare.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            newSquare.transform.localPosition = new Vector3(i + 0.5f , 0f);
         }
 
     }
