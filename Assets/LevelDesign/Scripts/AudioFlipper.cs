@@ -5,8 +5,6 @@ public class AudioFlipper : MonoBehaviour {
 
 	public static int currentaudioplayer = 0;
 	public static AudioSource[] audiosources = new AudioSource[0];
-
-	int audioplayerid;
 	AudioSource audiosource;
 
 	// Use this for initialization
@@ -14,7 +12,6 @@ public class AudioFlipper : MonoBehaviour {
 		
 		audiosource = GetComponent<AudioSource> ();
 		audiosource.mute = true;
-		audioplayerid = audiosources.Length;
 
 		AudioSource[] newaudiosources = new AudioSource[audiosources.Length + 1];
 		for (int i = 0; i < audiosources.Length; i++)
