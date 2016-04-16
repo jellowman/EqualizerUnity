@@ -9,6 +9,10 @@ public class UIController : MonoBehaviour
     private int numTriangles;
     private int numCircles;
 
+    public GameObject squareImage;
+    public GameObject circleImage;
+    public GameObject triangleImage;
+
     private ArrayList squares;
     private ArrayList triangles;
     private ArrayList circles;
@@ -22,6 +26,13 @@ public class UIController : MonoBehaviour
         numSquares = 0;
         numTriangles = 0;
         numCircles = 0;
+
+        squares = new ArrayList();
+        triangles = new ArrayList();
+        circles = new ArrayList();
+
+        numSquares = 6;
+        reDrawSquares();
 	}
 	
 	// Update is called once per frame
@@ -54,6 +65,18 @@ public class UIController : MonoBehaviour
 
     private void reDrawSquares()
     {
+        foreach (GameObject square in squares)
+        {
+            squares.Remove(square);
+            Destroy(square);
+        }
+
+        for(int i = 0; i < numSquares; i++)
+        {
+            GameObject newSquare = Instantiate(squareImage);
+            newSquare.transform.SetParent(this.gameObject.transform);
+            newSquare.transform.localPosition = new Vector3(i + 0.5f , 0.6f);
+        }
 
     }
 
