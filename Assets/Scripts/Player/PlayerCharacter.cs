@@ -9,4 +9,6 @@ public class PlayerCharacter : BaseCharacter {
 
 		rigidBody.velocity = new Vector2 (movex * Speed, movey * Speed);
 	}
+
+
 }

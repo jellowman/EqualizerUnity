@@ -10,6 +10,10 @@ public class GameState : MonoBehaviour {
 
 	public static GameState gameState;
 
+	public GameObject playerblue;
+	public GameObject playergreen;
+	public GameObject playerred;
+
 	public int maxEnemyCount = 10;
 
 	[HideInInspector]
