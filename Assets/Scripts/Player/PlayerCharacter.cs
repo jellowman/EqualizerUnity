@@ -34,4 +34,6 @@ public class PlayerCharacter : BaseCharacter {
 			verticalAxis = "Vertical_P1";
 		}
 	}
+
+
 }
