@@ -42,6 +42,7 @@ public class BaseCharacter : MonoBehaviour
 			lastShotTime = Time.time;
 			Bullet bulletInstance;
 			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
+			Debug.Log (currentShape);
 			bulletInstance.shotFrom = currentShape;
 			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
 		}

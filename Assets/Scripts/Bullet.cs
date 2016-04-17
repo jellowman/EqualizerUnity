@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 	public Shape shotFrom;
 
 	void OnTriggerEnter2D(Collider2D coll) {
-		PlayerCharacter player = coll.gameObject.GetComponent<PlayerCharacter> ();
+		BaseCharacter player = coll.gameObject.GetComponent<BaseCharacter> ();
 		if (player == null) {
 			Destroy (this.gameObject);
 		//same shapes cannot damage each other
