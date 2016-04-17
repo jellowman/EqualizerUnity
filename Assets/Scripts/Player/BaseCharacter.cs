@@ -12,12 +12,12 @@ public enum Shape { Cirlce, Square, Triangle};
 public class BaseCharacter : MonoBehaviour 
 {
 	//The bulletFreqency is how often it is fired, lower number means more bullets. 
-	public float bulletFrequency = 0.2f;
-	public float PlayerSpeed = 3f;
-	public float BulletSpeed = 12f;
-	private int maxDamage = 5;
+	public float bulletFrequency { get { return GameState.gameState.bulletFrequency; }  }
+	public float PlayerSpeed { get { return GameState.gameState.PlayerSpeed; }  }
+	public float BulletSpeed { get { return GameState.gameState.BulletSpeed; }  }
+	private int maxDamage { get { return GameState.gameState.maxDamage; }  }
 
-	private float invulnerableTime = 2;
+	private float invulnerableTime { get { return GameState.gameState.invulnerableTime; }  }
 
 	protected float movex = 0f;
 	protected float movey = 0f;
