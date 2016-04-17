@@ -18,7 +18,8 @@ public class TestScript : MonoBehaviour {
 			MapController.flipSong ();
 
 			GameObject player = GameObject.Find ("Player");
-			player.GetComponent<PlayerFlip> ().flip ();
+			//TODO fix this line
+			//player.GetComponent<PlayerFlip> ().flip ();
 		}
 	}
 }
