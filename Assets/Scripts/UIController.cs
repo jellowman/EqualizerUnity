@@ -45,9 +45,11 @@ public class UIController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if(Input.GetKeyDown("space"))
+        if(Input.GetKeyDown("g"))
         {
             reDrawSquares();
+            reDrawCircles();
+            reDrawTriangles();
         }
 	}
 
@@ -101,12 +103,13 @@ public class UIController : MonoBehaviour
         }
         triangles.RemoveRange(0, triangles.Count);
 
-        for (int i = 0; i < numSquares; i++)
+        for (int i = 0; i < numTriangles; i++)
         {
             GameObject newTriangle = Instantiate(triangleImage);
             newTriangle.transform.SetParent(this.gameObject.transform);
             newTriangle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
             newTriangle.transform.localPosition = new Vector3(i*OFFSET + 0.5f, -0.5f);
+            triangles.Add(newTriangle);
         }
     }
 
@@ -118,12 +121,13 @@ public class UIController : MonoBehaviour
         }
         circles.RemoveRange(0, circles.Count);
 
-        for (int i = 0; i < numSquares; i++)
+        for (int i = 0; i < numCircles; i++)
         {
             GameObject newCircle = Instantiate(circleImage);
             newCircle.transform.SetParent(this.gameObject.transform);
             newCircle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
             newCircle.transform.localPosition = new Vector3(i*OFFSET + 0.5f, -1f);
+            circles.Add(newCircle);
         }
     }
 }
