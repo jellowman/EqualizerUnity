@@ -22,6 +22,9 @@ public class GameState : MonoBehaviour {
 	public float invulnerableTime = 2;
 
 	[HideInInspector]
+	public int score = 0;
+
+	[HideInInspector]
 	public int killCount;
 
 	[HideInInspector]
