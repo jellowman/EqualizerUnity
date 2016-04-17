@@ -11,8 +11,12 @@ public class MapController : MonoBehaviour {
 	} 
 
 	public static void spawn(GameObject person) {
-		person.transform.position = Spawner.spawnpoints [counter];
-		counter = (counter + 1) % Spawner.spawnpoints.Length;
+		if (person != null) {
+			person.transform.position = Spawner.spawnpoints [counter];
+			counter = (counter + 1) % Spawner.spawnpoints.Length;
+		} else {
+			Debug.Log ("The object to be spawned is null.");
+		}
 	}
 
 	public static void jumpTo(int scenenumber) {
