@@ -11,6 +11,8 @@ public enum Shape { Cirlce, Square, Triangle};
 [RequireComponent (typeof (Rigidbody2D))]
 public class BaseCharacter : MonoBehaviour 
 {
+	//The bulletFreqency is how often it is fired, lower number means more bullets. 
+	public const float bulletFrequency = 0.2f;
 	public const float PlayerSpeed = 3f;
 	public const float BulletSpeed = 12f;
 	private const int maxDamage = 5;
@@ -52,7 +54,7 @@ public class BaseCharacter : MonoBehaviour
 
 	public void Shoot()
 	{
-		if (Time.time - lastShotTime > .5f) {
+		if (Time.time - lastShotTime > bulletFrequency) {
 			lastShotTime = Time.time;
 			Bullet bulletInstance;
 			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
