@@ -26,6 +26,20 @@ public class Enemy : BaseCharacter {
 				}
 			}
 		}
+		if (target == null) {
+			foreach (BaseCharacter bc in targets) {
+				if (this.currentShape != bc.currentShape) {
+					//Calculate distance to the object
+					double dist = Mathf.Sqrt (Mathf.Pow((bc.transform.position.x - this.transform.position.x),2) + Mathf.Pow((bc.transform.position.y - this.transform.position.y),2));
+					//Debug.Log (dist);
+					//if the object is closer, switch to it.
+					if (dist < max) {
+						max = dist;
+						target = bc;
+					}
+				}
+			}
+		}
 
 		//get the x-y components of the vector to the target
 		if (target != null) {
