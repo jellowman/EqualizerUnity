@@ -10,9 +10,6 @@ public class Enemy : BaseCharacter {
 		double max = double.MaxValue;
 		BaseCharacter target = null;
 
-		//if true, we're stuck and need to avoid something
-		bool avoid = false;
-
 		foreach (BaseCharacter bc in targets) {
 			if (isTarget(this.currentShape, bc.currentShape)) {
 				//Calculate distance to the object
@@ -34,45 +31,8 @@ public class Enemy : BaseCharacter {
 			movex = 0;
 			movey = 0;
 		}
-
-		Vector2 temp = rigidBody.velocity;
 		//make the vector
-		if (!avoid) {
-			temp = new Vector2 (movex, movey);
-		}
-		//simple wall avoidance
-		//get current vector
-		float current = rigidBody.velocity.magnitude;
-
-		bool needAvoidVector = true;
-		float avoidStart = 0f;
-		//check if stuck (or close enough)
-		if (current < (temp.magnitude / 4)){
-			//flag that we need to avoid something
-			avoid = true;
-			needAvoidVector = false;
-			//store the start avoidance movement time
-			avoidStart = Time.time;
-			int direction = Random.Range (0, 4);
-			if (direction == 0) {
-				temp = new Vector2 (0, movey);
-			} else if (direction == 1) {
-				temp = new Vector2 (movex, 0);
-			} else if (direction == 2) {
-				temp = new Vector2 (0, -movey);
-			} else {
-				temp = new Vector2 (-movex, 0);
-			}
-		}
-
-		//check if we've been trying to avoid for more than half a second
-		if ((Time.time - avoidStart) < .5f) {
-			
-		} else {
-			//we've been trying to dodge long enough.  Resume chase.
-			avoid = false;
-		}
-
+		Vector2 temp = new Vector2 (movex, movey);
 		//use (unit vector * player speed) so the enemies don't outrun the player
 		rigidBody.velocity = temp.normalized * PlayerSpeed;
 
