@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-enum Shape { Cirlce, Square, Triangle};
+public enum Shape { Cirlce, Square, Triangle};
 
 [RequireComponent (typeof (Rigidbody2D))]
 public class BaseCharacter : MonoBehaviour 
@@ -16,6 +16,8 @@ public class BaseCharacter : MonoBehaviour
 
 	private float lastShotTime = 0f;
 
+	public Shape currentShape { get; set; } 
+
 	/// <summary>
 	/// The last direction the player was facing
 	/// </summary>
@@ -24,6 +26,13 @@ public class BaseCharacter : MonoBehaviour
  	void Awake() {
 		rigidBody = this.GetComponent<Rigidbody2D>();
 		lastDirection = new Vector2 (1, 0);
+		//Set current shape to square by default
+		currentShape = Shape.Square;
+	}
+
+	public void TakeDamage()
+	{
+		
 	}
 
 	public void Shoot()
@@ -32,6 +41,7 @@ public class BaseCharacter : MonoBehaviour
 			lastShotTime = Time.time;
 			Bullet bulletInstance;
 			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
+			bulletInstance.shotFrom = currentShape;
 			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
 		}
 	}
