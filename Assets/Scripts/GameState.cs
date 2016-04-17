@@ -15,7 +15,8 @@ public class GameState : MonoBehaviour {
 
 	public Bullet bulletPrefab;
 
-	public float bulletFrequency = 0.2f;
+	public float playerBulletFrequency = 0.2f;
+	public float enemyBulletFrequency = 0.5f;
 	public float PlayerSpeed = 3f;
 	public float BulletSpeed = 12f;
 	public int maxDamage = 5;

@@ -100,7 +100,6 @@ public class Main : MonoBehaviour {
 	public void removeEnemy(GameObject enemy) {
 		
 		int color = enemy.GetComponent<Enemy> ().getColor();
-		Debug.Log("Enemy Color: " + color);
 		colorcount[color]--;
 
 		if (color == 0)

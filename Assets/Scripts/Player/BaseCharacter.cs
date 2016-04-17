@@ -11,8 +11,6 @@ public enum Shape { Cirlce, Square, Triangle};
 [RequireComponent (typeof (Rigidbody2D))]
 public class BaseCharacter : MonoBehaviour 
 {
-	//The bulletFreqency is how often it is fired, lower number means more bullets. 
-	public float bulletFrequency { get { return GameState.gameState.bulletFrequency; }  }
 	public float PlayerSpeed { get { return GameState.gameState.PlayerSpeed; }  }
 	public float BulletSpeed { get { return GameState.gameState.BulletSpeed; }  }
 	private int maxDamage { get { return GameState.gameState.maxDamage; }  }
@@ -66,12 +64,19 @@ public class BaseCharacter : MonoBehaviour
 
 	public void Shoot()
 	{
-		if (Time.time - lastShotTime > bulletFrequency) {
-			lastShotTime = Time.time;
-			Bullet bulletInstance;
-			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
-			bulletInstance.shotFrom = this;
-			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
+		if (Time.time - spawnTime > invulnerableTime) {
+			float bulletFrequency;
+			if (this is Enemy)
+				bulletFrequency = GameState.gameState.enemyBulletFrequency;
+			else
+				bulletFrequency = GameState.gameState.playerBulletFrequency;
+			if (Time.time - lastShotTime > bulletFrequency) {
+				lastShotTime = Time.time;
+				Bullet bulletInstance;
+				bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
+				bulletInstance.shotFrom = this;
+				bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
+			}
 		}
 	}
 
