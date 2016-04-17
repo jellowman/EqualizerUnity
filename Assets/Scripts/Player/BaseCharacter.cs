@@ -22,7 +22,7 @@ public class BaseCharacter : MonoBehaviour
 
 	private float lastShotTime = 0f;
 
-	private int currentDamange;
+	private int currentDamange = 5;
 
 	public Shape currentShape; 
 
@@ -43,7 +43,10 @@ public class BaseCharacter : MonoBehaviour
 		currentDamange--;
 		if (currentDamange <= 0) {
 			Debug.Log (currentShape.ToString() + " Died");
-			Destroy (this.gameObject);
+			if(this is PlayerCharacter)
+				GameState.gameState.main.removeEnemy (this.gameObject);
+			if(this is Enemy)
+				GameState.gameState.main.removeEnemy (this.gameObject);
 		}
 	}
 
