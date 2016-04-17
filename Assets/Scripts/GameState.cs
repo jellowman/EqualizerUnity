@@ -29,9 +29,12 @@ public class GameState : MonoBehaviour {
 
 	void Awake() 
 	{
-		DontDestroyOnLoad (transform.gameObject);
-		main = GameObject.FindObjectOfType<Main> ();
-		gameState = this;
+		if (gameState == null) {
+			DontDestroyOnLoad (transform.gameObject);
+			gameState = this;
+		} else {
+			Destroy (this.gameObject);
+		}
 	}
 
 	public void initializeSinglePlayer()

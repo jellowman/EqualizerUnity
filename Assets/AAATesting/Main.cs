@@ -18,7 +18,7 @@ public class Main : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		GameState.gameState.main = GameObject.FindObjectOfType<Main> ();
 		//TODO: Getobjects from gamestate
 		ui = uiobject.GetComponent<UIController>();
 		//player = GameState.gameState.getPlayer ();
