@@ -3,11 +3,15 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour 
 {
-	Shape shotFrom;
+	public Shape shotFrom;
 
 	void OnTriggerEnter2D(Collider2D coll) {
-		if (coll.gameObject.GetComponent<PlayerCharacter> () == null) {
+		PlayerCharacter player = coll.gameObject.GetComponent<PlayerCharacter> ();
+		if (player == null) {
 			Destroy (this.gameObject);
+		//same shapes cannot damage each other
+		} else if(!(player.currentShape == shotFrom)) {
+			player.TakeDamage();
 		}
 	}
 }
