@@ -58,7 +58,6 @@ public class BaseCharacter : MonoBehaviour
 			lastShotTime = Time.time;
 			Bullet bulletInstance;
 			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
-			Debug.Log (currentShape);
 			bulletInstance.shotFrom = currentShape;
 			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
 		}
@@ -76,5 +75,15 @@ public class BaseCharacter : MonoBehaviour
 			|| source == Shape.Cirlce && target == Shape.Triangle)
 			return true;
 		return false;
+	}
+
+	public int getColor() {
+		
+		if (currentShape == Shape.Cirlce)
+			return 0;
+		else if (currentShape == Shape.Square)
+			return 1;
+		else
+			return 2;
 	}
 }
