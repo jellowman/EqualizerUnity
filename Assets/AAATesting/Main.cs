@@ -4,7 +4,9 @@ using System.Collections;
 public class Main : MonoBehaviour {
 
 	public GameObject player;
-	public GameObject enemy;
+	public GameObject greenememy;
+	public GameObject redenemy;
+	public GameObject blueenemy;
 
 	public int maxenemies;
 	public ArrayList enemies;
@@ -33,7 +35,7 @@ public class Main : MonoBehaviour {
 	private void spawnEnemies() {
 
 		while (enemies.Count < maxenemies) {
-			GameObject newenemy = Instantiate (enemy);
+			GameObject newenemy = Instantiate (redenemy);
 			enemies.Add (newenemy);
 			MapController.spawn (newenemy);
 		}
@@ -41,5 +43,15 @@ public class Main : MonoBehaviour {
 
 	public void spawnPlayer() {
 		MapController.spawn (player);
+	}
+
+	public void removeEnemy(GameObject enemy) {
+
+		Destroy (enemy);
+	}
+
+	public void removePlayer(GameObject player) {
+
+		Destroy (player);
 	}
 }
