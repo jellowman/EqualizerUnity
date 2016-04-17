@@ -7,7 +7,7 @@ enum Shape { Cirlce, Square, Triangle};
 public class BaseCharacter : MonoBehaviour 
 {
 	public const float PlayerSpeed = 3f;
-	public const float BulletSpeed = 15f;
+	public const float BulletSpeed = 12f;
 
 	protected float movex = 0f;
 	protected float movey = 0f;
@@ -26,13 +26,13 @@ public class BaseCharacter : MonoBehaviour
 		lastDirection = new Vector2 (1, 0);
 	}
 
-	public void Shoot(Vector2 direction)
+	public void Shoot()
 	{
-		if (Time.time - lastShotTime > .1f) {
+		if (Time.time - lastShotTime > .15f) {
 			lastShotTime = Time.time;
 			Bullet bulletInstance;
 			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
-			bulletInstance.GetComponent<Rigidbody2D> ().velocity = direction.normalized * BulletSpeed;
+			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
 		}
 	}
 }
