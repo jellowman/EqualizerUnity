@@ -5,10 +5,13 @@ using System.Collections;
 public class UIController : MonoBehaviour 
 {
     //Keeps count of the number of each type of object in the level
-    public float OFFSET = 0.5f;
+    public float offset;
     public int numSquares;
     public int numTriangles;
     public int numCircles;
+    public int maxNumShapes;
+    public Transform transPanel;
+    public Transform transRedBar;
 
     public GameObject squareImage;
     public GameObject circleImage;
@@ -18,16 +21,12 @@ public class UIController : MonoBehaviour
     private ArrayList triangles;
     private ArrayList circles;
 
-    private static int maxShapesAllowed;
-    private RectTransform rectT;
-    private float width;
 	// Use this for initialization
 	void Start () 
     {
-        /*numSquares = 0;
-        numTriangles = 0;
-        numCircles = 0;*/
-
+        maxNumShapes = 10;
+        offset = 0.5f;
+        reDrawFrame();
         squares = new ArrayList();
         triangles = new ArrayList();
         circles = new ArrayList();
@@ -45,36 +44,43 @@ public class UIController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if(Input.GetKeyDown("g"))
+        /*if(Input.GetKeyDown("g"))
         {
             reDrawSquares();
             reDrawCircles();
             reDrawTriangles();
-        }
+            reDrawFrame();
+        }*/
 	}
 
     
 
     //Called everytime a new square enemy is made to tell the UI how many there are now.
-    public void updateSquares()
+    public void setNumSquares(int num)
     {
-        //Get num of squares from GameState
-        //numSquares =
+        numSquares = num;
         reDrawSquares();
     }
 
     //Called everytime a circle dies or is born
-    public void updateCircles()
+    public void setNumCircles(int num)
     {
-        //numCircles = 
+        numCircles = num;
         reDrawCircles();
     }
 
     //Called everytime a triangle dies or is born
-    public void updateTriangles()
+    public void setNumTriangles(int num)
     {
-        //numTriangles = 
+        numTriangles = num;
         reDrawTriangles();
+    }
+
+    //Called everytime the max limit of shapes is raised
+    public void setMaxNumShapes(int num)
+    {
+        maxNumShapes = num;
+        reDrawFrame();
     }
 
     private void reDrawSquares()
@@ -90,7 +96,7 @@ public class UIController : MonoBehaviour
             GameObject newSquare = Instantiate(squareImage);
             newSquare.transform.SetParent(this.gameObject.transform);
             newSquare.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            newSquare.transform.localPosition = new Vector3(i*OFFSET + 0.5f , 0f);
+            newSquare.transform.localPosition = new Vector3(offset * (i + 0.5f), 0f);
             squares.Add(newSquare);
         }
     }
@@ -108,7 +114,7 @@ public class UIController : MonoBehaviour
             GameObject newTriangle = Instantiate(triangleImage);
             newTriangle.transform.SetParent(this.gameObject.transform);
             newTriangle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            newTriangle.transform.localPosition = new Vector3(i*OFFSET + 0.5f, -0.5f);
+            newTriangle.transform.localPosition = new Vector3(offset * (i + 0.5f), -0.5f);
             triangles.Add(newTriangle);
         }
     }
@@ -126,8 +132,25 @@ public class UIController : MonoBehaviour
             GameObject newCircle = Instantiate(circleImage);
             newCircle.transform.SetParent(this.gameObject.transform);
             newCircle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            newCircle.transform.localPosition = new Vector3(i*OFFSET + 0.5f, -1f);
+            newCircle.transform.localPosition = new Vector3(offset*(i + 0.5f), -1f);
             circles.Add(newCircle);
         }
+    }
+
+    private void reDrawFrame()
+    {
+        
+        //Transform transPanel = transform.Find("Panel");
+        //Transform transRedBar = transform.Find("Red Bar");
+
+        //Debug.Log("Yo whatup");
+
+        float panelLength = maxNumShapes*offset;
+        float panelPosition = panelLength/2 - 0.5f;
+        transPanel.localPosition = new Vector3(panelPosition, -0.5f);
+        transPanel.localScale = new Vector3(panelLength, 2f, 1f);
+
+        transRedBar.localPosition = new Vector3(panelLength - 0.5f*offset, -0.5f);
+        transRedBar.localScale = new Vector3(offset, 2f, 1f);
     }
 }
