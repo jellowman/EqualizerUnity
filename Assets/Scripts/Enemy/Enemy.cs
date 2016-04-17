@@ -2,11 +2,10 @@
 using System.Collections;
 
 public class Enemy : BaseCharacter {
-	
-	// Use this for initialization
-	void Start () {
-	
-	}
+
+	//if true, we're stuck and need to avoid something
+	bool avoid = false;
+	bool needAvoidVector = false;
 
 	void FixedUpdate() {
 		BaseCharacter[] targets = GameObject.FindObjectsOfType<BaseCharacter> ();
@@ -36,8 +35,49 @@ public class Enemy : BaseCharacter {
 			movex = 0;
 			movey = 0;
 		}
+
+		Vector2 temp = rigidBody.velocity;
 		//make the vector
-		Vector2 temp = new Vector2 (movex, movey);
+		if (!avoid) {
+			temp = new Vector2 (movex, movey);
+		}
+		//simple wall avoidance
+		//get current vector
+		float current = rigidBody.velocity.magnitude;
+
+		float avoidStart = 0f;
+		//check if stuck (or close enough)
+		if (current < (temp.magnitude / 4) && !avoid){
+			//flag that we need to avoid something
+			needAvoidVector = true;
+			//store the start avoidance movement time
+			avoidStart = Time.time;
+			avoid = true;
+		}
+
+		//check if we've been trying to avoid for more than half a second
+		if (avoid) {
+			if ((Time.time - avoidStart) > .5f) {
+				Debug.Log (Time.time - avoidStart);
+				//we've been trying to dodge long enough.  Resume chase.
+				avoid = false;
+			}
+
+			if (needAvoidVector) {
+				needAvoidVector = false;
+				int direction = Random.Range (0, 4);
+				if (direction == 0) {
+					temp = new Vector2 (0, movey);
+				} else if (direction == 1) {
+					temp = new Vector2 (movex, 0);
+				} else if (direction == 2) {
+					temp = new Vector2 (0, -movey);
+				} else {
+					temp = new Vector2 (-movex, 0);
+				}
+			}
+		}
+
 		//use (unit vector * player speed) so the enemies don't outrun the player
 		rigidBody.velocity = temp.normalized * PlayerSpeed;
 
@@ -49,10 +89,4 @@ public class Enemy : BaseCharacter {
 		Shoot();
 	}
 
-
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
