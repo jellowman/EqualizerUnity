@@ -2,16 +2,17 @@
 using System.Collections;
 
 public class Enemy : BaseCharacter {
-	
+
+	//if true, we're stuck and need to avoid something
+	bool avoid = false;
+	bool needAvoidVector = false;
+
 	void FixedUpdate() {
 		BaseCharacter[] targets = GameObject.FindObjectsOfType<BaseCharacter> ();
 		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Wall");
 
 		double max = double.MaxValue;
 		BaseCharacter target = null;
-
-		//if true, we're stuck and need to avoid something
-		bool avoid = false;
 
 		foreach (BaseCharacter bc in targets) {
 			if (isTarget(this.currentShape, bc.currentShape)) {
@@ -44,33 +45,37 @@ public class Enemy : BaseCharacter {
 		//get current vector
 		float current = rigidBody.velocity.magnitude;
 
-		bool needAvoidVector = true;
 		float avoidStart = 0f;
 		//check if stuck (or close enough)
-		if (current < (temp.magnitude / 4)){
+		if (current < (temp.magnitude / 4) && !avoid){
 			//flag that we need to avoid something
-			avoid = true;
-			needAvoidVector = false;
+			needAvoidVector = true;
 			//store the start avoidance movement time
 			avoidStart = Time.time;
-			int direction = Random.Range (0, 4);
-			if (direction == 0) {
-				temp = new Vector2 (0, movey);
-			} else if (direction == 1) {
-				temp = new Vector2 (movex, 0);
-			} else if (direction == 2) {
-				temp = new Vector2 (0, -movey);
-			} else {
-				temp = new Vector2 (-movex, 0);
-			}
+			avoid = true;
 		}
 
 		//check if we've been trying to avoid for more than half a second
-		if ((Time.time - avoidStart) < .5f) {
-			
-		} else {
-			//we've been trying to dodge long enough.  Resume chase.
-			avoid = false;
+		if (avoid) {
+			if ((Time.time - avoidStart) > .5f) {
+				Debug.Log (Time.time - avoidStart);
+				//we've been trying to dodge long enough.  Resume chase.
+				avoid = false;
+			}
+
+			if (needAvoidVector) {
+				needAvoidVector = false;
+				int direction = Random.Range (0, 4);
+				if (direction == 0) {
+					temp = new Vector2 (0, movey);
+				} else if (direction == 1) {
+					temp = new Vector2 (movex, 0);
+				} else if (direction == 2) {
+					temp = new Vector2 (0, -movey);
+				} else {
+					temp = new Vector2 (-movex, 0);
+				}
+			}
 		}
 
 		//use (unit vector * player speed) so the enemies don't outrun the player
