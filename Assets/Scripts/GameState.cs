@@ -15,6 +15,12 @@ public class GameState : MonoBehaviour {
 
 	public Bullet bulletPrefab;
 
+	public float bulletFrequency = 0.2f;
+	public float PlayerSpeed = 3f;
+	public float BulletSpeed = 12f;
+	public int maxDamage = 5;
+	public float invulnerableTime = 2;
+
 	[HideInInspector]
 	public int killCount;
 
