@@ -10,13 +10,13 @@ public class Enemy : BaseCharacter {
 
 	void FixedUpdate() {
 		BaseCharacter[] targets = GameObject.FindObjectsOfType<BaseCharacter> ();
-		//GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Wall");
+		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Wall");
 
 		double max = double.MaxValue;
 		BaseCharacter target = null;
 
 		foreach (BaseCharacter bc in targets) {
-			if (!(CompareTag(bc.tag))) {
+			if (this.currentShape != bc.currentShape) {
 				//Calculate distance to the object
 				double dist = Mathf.Sqrt (Mathf.Pow((bc.transform.position.x - this.transform.position.x),2) + Mathf.Pow((bc.transform.position.y - this.transform.position.y),2));
 				//Debug.Log (dist);
@@ -32,7 +32,10 @@ public class Enemy : BaseCharacter {
 		if (target != null) {
 			movex = target.transform.position.x - transform.position.x;
 			movey = target.transform.position.y - transform.position.y;
-		} 
+		} else {
+			movex = 0;
+			movey = 0;
+		}
 		//make the vector
 		Vector2 temp = new Vector2 (movex, movey);
 		//use (unit vector * player speed) so the enemies don't outrun the player
