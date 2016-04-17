@@ -2,11 +2,6 @@
 using System.Collections;
 
 public class TestScript : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -16,6 +11,12 @@ public class TestScript : MonoBehaviour {
 			MapController.flipSong ();
 			GameObject player = GameObject.Find ("Player");
 			player.GetComponent<PlayerFlip> ().flip ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.O)) {
+
+			GameObject player = GameObject.Find ("Player");
+			MapController.spawn (player);
 		}
 	}
 }
