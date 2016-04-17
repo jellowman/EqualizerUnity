@@ -11,28 +11,31 @@ public class Enemy : BaseCharacter {
 	void FixedUpdate() {
 		BaseCharacter[] targets = GameObject.FindObjectsOfType<BaseCharacter> ();
 		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Wall");
+
 		double max = double.MaxValue;
 		BaseCharacter target = null;
+
 		foreach (BaseCharacter bc in targets) {
 			if (!(this.CompareTag (bc.tag))) {
 				double dist = Mathf.Sqrt ((bc.transform.position.x - this.transform.position.x) + (bc.transform.position.y - this.transform.position.y));
 				if (dist < max) {
 					max = dist;
-					null = bc;
+					target = bc;
 				}
 			}
 		}
 
-		movex = Input.GetAxis (horizontalAxis);
-		movey = Input.GetAxis (verticalAxis);
+		movex = target.transform.position.x - transform.position.x;
+		movey = target.transform.position.y - transform.position.y;
 
-		rigidBody.velocity = new Vector2 (movex * PlayerSpeed, movey * PlayerSpeed);
+		rigidBody.velocity = new Vector2 (movex, movey);
+		rigidBody.velocity = rigidBody.velocity.normalized * PlayerSpeed;
 
 		if (movex != 0 || movey != 0) {
-			lastDirection = new Vector2 (movex, movey);
+			lastDirection = rigidBody.velocity;
 		}
 
-		Shoot(lastDirection);
+		Shoot();
 	}
 
 
