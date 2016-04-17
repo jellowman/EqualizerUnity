@@ -45,7 +45,7 @@ public class BaseCharacter : MonoBehaviour
 
 	}
 
-	public void TakeDamage()
+	public void TakeDamage(bool damageFromPlayer = false)
 	{
 		if (Time.time - spawnTime > invulnerableTime) {
 			currentDamange--;
@@ -53,8 +53,12 @@ public class BaseCharacter : MonoBehaviour
 				Debug.Log (currentShape.ToString () + " Died");
 				if (this is PlayerCharacter)
 					GameState.gameState.main.removePlayer (this.gameObject);
-				if (this is Enemy)
+				if (this is Enemy) {
+					if (damageFromPlayer) {
+						GameState.gameState.score++;
+					}
 					GameState.gameState.main.removeEnemy (this.gameObject);
+				}
 			}
 		}
 	}
@@ -65,7 +69,7 @@ public class BaseCharacter : MonoBehaviour
 			lastShotTime = Time.time;
 			Bullet bulletInstance;
 			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
-			bulletInstance.shotFrom = currentShape;
+			bulletInstance.shotFrom = this;
 			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
 		}
 	}
