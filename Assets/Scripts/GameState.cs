@@ -10,6 +10,8 @@ public class GameState : MonoBehaviour {
 
 	public static GameState gameState;
 
+	public Main main;
+
 	public GameObject playerblue;
 	public GameObject playergreen;
 	public GameObject playerred;
@@ -29,6 +31,7 @@ public class GameState : MonoBehaviour {
 	void Awake() 
 	{
 		DontDestroyOnLoad (transform.gameObject);
+		main = GameObject.FindObjectOfType<Main> ();
 		gameState = this;
 	}
 
