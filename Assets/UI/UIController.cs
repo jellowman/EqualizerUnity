@@ -5,9 +5,9 @@ using System.Collections;
 public class UIController : MonoBehaviour 
 {
     //Keeps count of the number of each type of object in the level
-    private int numSquares;
-    private int numTriangles;
-    private int numCircles;
+    public int numSquares;
+    public int numTriangles;
+    public int numCircles;
 
     public GameObject squareImage;
     public GameObject circleImage;
@@ -23,9 +23,9 @@ public class UIController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        numSquares = 0;
+        /*numSquares = 0;
         numTriangles = 0;
-        numCircles = 0;
+        numCircles = 0;*/
 
         squares = new ArrayList();
         triangles = new ArrayList();
@@ -33,12 +33,20 @@ public class UIController : MonoBehaviour
 
         numSquares = 6;
         reDrawSquares();
+
+        numTriangles = 3;
+        reDrawTriangles();
+
+        numCircles = 8;
+        reDrawCircles();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-	
+        reDrawCircles();
+        reDrawSquares();
+        reDrawTriangles();
 	}
 
     //Called everytime a new square enemy is made to tell the UI how many there are now.
@@ -78,16 +86,39 @@ public class UIController : MonoBehaviour
             newSquare.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
             newSquare.transform.localPosition = new Vector3(i + 0.5f , 0f);
         }
-
-    }
-
-    private void reDrawCircles()
-    {
-
     }
 
     private void reDrawTriangles()
     {
+        foreach (GameObject circle in circles)
+        {
+            squares.Remove(circle);
+            Destroy(circle);
+        }
 
+        for (int i = 0; i < numSquares; i++)
+        {
+            GameObject newTriangle = Instantiate(triangleImage);
+            newTriangle.transform.SetParent(this.gameObject.transform);
+            newTriangle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            newTriangle.transform.localPosition = new Vector3(i + 0.5f, -0.5f);
+        }
+    }
+
+    private void reDrawCircles()
+    {
+        foreach (GameObject circle in circles)
+        {
+            squares.Remove(circle);
+            Destroy(circle);
+        }
+
+        for (int i = 0; i < numSquares; i++)
+        {
+            GameObject newCircle = Instantiate(circleImage);
+            newCircle.transform.SetParent(this.gameObject.transform);
+            newCircle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            newCircle.transform.localPosition = new Vector3(i + 0.5f, -1f);
+        }
     }
 }
