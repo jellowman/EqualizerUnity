@@ -5,6 +5,7 @@ using System.Collections;
 public class UIController : MonoBehaviour 
 {
     //Keeps count of the number of each type of object in the level
+    public float OFFSET = 0.5f;
     public int numSquares;
     public int numTriangles;
     public int numCircles;
@@ -44,13 +45,16 @@ public class UIController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        reDrawCircles();
-        reDrawSquares();
-        reDrawTriangles();
+        if(Input.GetKeyDown("space"))
+        {
+            reDrawSquares();
+        }
 	}
 
+    
+
     //Called everytime a new square enemy is made to tell the UI how many there are now.
-    public void updateSquares(GameObject square)
+    public void updateSquares()
     {
         //Get num of squares from GameState
         //numSquares =
@@ -75,33 +79,34 @@ public class UIController : MonoBehaviour
     {
         foreach (GameObject square in squares)
         {
-            squares.Remove(square);
             Destroy(square);
         }
+        squares.RemoveRange(0, squares.Count);
 
         for(int i = 0; i < numSquares; i++)
         {
             GameObject newSquare = Instantiate(squareImage);
             newSquare.transform.SetParent(this.gameObject.transform);
             newSquare.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            newSquare.transform.localPosition = new Vector3(i + 0.5f , 0f);
+            newSquare.transform.localPosition = new Vector3(i*OFFSET + 0.5f , 0f);
+            squares.Add(newSquare);
         }
     }
 
     private void reDrawTriangles()
     {
-        foreach (GameObject circle in circles)
+        foreach (GameObject triangle in triangles)
         {
-            squares.Remove(circle);
-            Destroy(circle);
+            Destroy(triangle);
         }
+        triangles.RemoveRange(0, triangles.Count);
 
         for (int i = 0; i < numSquares; i++)
         {
             GameObject newTriangle = Instantiate(triangleImage);
             newTriangle.transform.SetParent(this.gameObject.transform);
             newTriangle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            newTriangle.transform.localPosition = new Vector3(i + 0.5f, -0.5f);
+            newTriangle.transform.localPosition = new Vector3(i*OFFSET + 0.5f, -0.5f);
         }
     }
 
@@ -109,16 +114,16 @@ public class UIController : MonoBehaviour
     {
         foreach (GameObject circle in circles)
         {
-            squares.Remove(circle);
             Destroy(circle);
         }
+        circles.RemoveRange(0, circles.Count);
 
         for (int i = 0; i < numSquares; i++)
         {
             GameObject newCircle = Instantiate(circleImage);
             newCircle.transform.SetParent(this.gameObject.transform);
             newCircle.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            newCircle.transform.localPosition = new Vector3(i + 0.5f, -1f);
+            newCircle.transform.localPosition = new Vector3(i*OFFSET + 0.5f, -1f);
         }
     }
 }
