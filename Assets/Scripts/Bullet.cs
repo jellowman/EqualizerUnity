@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
 		if (player == null) {
 			Destroy (this.gameObject);
 		//same shapes cannot damage each other
-		} else if(!(player.currentShape == shotFrom)) {
+		} else if(BaseCharacter.isTarget(shotFrom, player.currentShape)) {
 			player.TakeDamage();
 		}
 	}

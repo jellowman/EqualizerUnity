@@ -16,7 +16,7 @@ public class Enemy : BaseCharacter {
 		BaseCharacter target = null;
 
 		foreach (BaseCharacter bc in targets) {
-			if (!(CompareTag(bc.tag))) {
+			if (isTarget(this.currentShape, bc.currentShape)) {
 				//Calculate distance to the object
 				double dist = Mathf.Sqrt (Mathf.Pow((bc.transform.position.x - this.transform.position.x),2) + Mathf.Pow((bc.transform.position.y - this.transform.position.y),2));
 				//Debug.Log (dist);
