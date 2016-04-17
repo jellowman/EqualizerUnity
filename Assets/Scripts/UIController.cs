@@ -31,13 +31,13 @@ public class UIController : MonoBehaviour
         triangles = new ArrayList();
         circles = new ArrayList();
 
-        numSquares = 6;
+		numSquares = 0;
         reDrawSquares();
 
-        numTriangles = 3;
+        numTriangles = 0;
         reDrawTriangles();
 
-        numCircles = 8;
+        numCircles = 0;
         reDrawCircles();
 	}
 	
