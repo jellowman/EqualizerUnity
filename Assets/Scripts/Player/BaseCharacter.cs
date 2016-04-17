@@ -16,11 +16,12 @@ public class BaseCharacter : MonoBehaviour
 
 	private float lastShotTime = 0f;
 
-	public Shape currentShape { get; set; } 
+	public Shape currentShape; 
 
 	/// <summary>
 	/// The last direction the player was facing
 	/// </summary>
+	[HideInInspector]
 	public Vector2 lastDirection;
 
  	void Awake() {
