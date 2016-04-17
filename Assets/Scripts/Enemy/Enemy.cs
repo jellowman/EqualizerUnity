@@ -72,7 +72,6 @@ public class Enemy : BaseCharacter {
 		//check if we've been trying to avoid for more than half a second
 		if (avoid) {
 			if ((Time.time - avoidStart) > .5f) {
-				Debug.Log (Time.time - avoidStart);
 				//we've been trying to dodge long enough.  Resume chase.
 				avoid = false;
 			}
