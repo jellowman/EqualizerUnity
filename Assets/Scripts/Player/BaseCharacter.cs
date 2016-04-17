@@ -16,7 +16,7 @@ public class BaseCharacter : MonoBehaviour
 
 	private float lastShotTime = 0f;
 
-	public Shape currentShape { get; private set; } 
+	public Shape currentShape { get; set; } 
 
 	/// <summary>
 	/// The last direction the player was facing
