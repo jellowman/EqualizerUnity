@@ -6,7 +6,8 @@ public class Spawner : MonoBehaviour {
 	public static Vector3[] spawnpoints = new Vector3[0];
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		Debug.Log ("Made it");
 		Vector3[] newspawnpoints = new Vector3 [spawnpoints.Length+1];
 		for (int i = 0; i < spawnpoints.Length; i++)
 			newspawnpoints [i] = spawnpoints [i];
