@@ -24,7 +24,7 @@ public class BaseCharacter : MonoBehaviour
 
 	private float lastShotTime = 0f;
 
-	private int currentDamange = 5;
+	private int currentDamange = 1;
 
 	public Shape currentShape; 
 
@@ -46,7 +46,7 @@ public class BaseCharacter : MonoBehaviour
 		if (currentDamange <= 0) {
 			Debug.Log (currentShape.ToString() + " Died");
 			if(this is PlayerCharacter)
-				GameState.gameState.main.removeEnemy (this.gameObject);
+				GameState.gameState.main.removePlayer (this.gameObject);
 			if(this is Enemy)
 				GameState.gameState.main.removeEnemy (this.gameObject);
 		}
@@ -58,7 +58,6 @@ public class BaseCharacter : MonoBehaviour
 			lastShotTime = Time.time;
 			Bullet bulletInstance;
 			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
-			Debug.Log (currentShape);
 			bulletInstance.shotFrom = currentShape;
 			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
 		}
@@ -76,5 +75,15 @@ public class BaseCharacter : MonoBehaviour
 			|| source == Shape.Cirlce && target == Shape.Triangle)
 			return true;
 		return false;
+	}
+
+	public int getColor() {
+		
+		if (currentShape == Shape.Cirlce)
+			return 0;
+		else if (currentShape == Shape.Square)
+			return 1;
+		else
+			return 2;
 	}
 }

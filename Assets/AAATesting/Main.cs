@@ -48,16 +48,16 @@ public class Main : MonoBehaviour {
 
 			float[] spawnrates = new float[2];
 
+			/*
 			if (totalenemies != 0) {
 				spawnrates [0] = ((float)colorcount [0]) / totalenemies;
 				spawnrates [1] = ((float)colorcount [1]) / totalenemies + spawnrates [0];
-			} else {
-				spawnrates [0] = 0.33333f;
-				spawnrates [1] = 0.66666f;
-			}
+			}*/
+
+			spawnrates [0] = 0.33333f;
+			spawnrates [1] = 0.66666f;
 
 			float random = Random.value;
-			Debug.Log (Random.value);
 
 			GameObject newenemy;
 			if (random < spawnrates [0])
@@ -74,8 +74,6 @@ public class Main : MonoBehaviour {
 	}
 
 	private GameObject addEnemy(int i) {
-
-		Debug.Log ("Adding Enemy");
 
 		colorcount [i]++;
 		GameObject newenemy;
@@ -100,10 +98,18 @@ public class Main : MonoBehaviour {
 	}
 
 	public void removeEnemy(GameObject enemy) {
-		//TODO: Reimplement these lines
-		int inversecolor = 0;
-		//int inversecolor = enemy.GetComponent<Enemy> ().Shape;
-		colorcount[2 - inversecolor]--;
+		
+		int color = enemy.GetComponent<Enemy> ().getColor();
+		Debug.Log("Enemy Color: " + color);
+		colorcount[color]--;
+
+		if (color == 0)
+			ui.setNumCircles (colorcount [0]);
+		else if (color == 1)
+			ui.setNumSquares (colorcount [1]);
+		else
+			ui.setNumTriangles (colorcount [2]);
+
 		Destroy (enemy);
 		spawnEnemies ();
 	}
