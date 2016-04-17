@@ -23,10 +23,10 @@ public class PlayerFlip : MonoBehaviour {
 	}
 
 	public void flip() {
-
+		player.currentShape = (Shape)currentcolor;
 		colors [currentcolor].SetActive (false);
 		currentcolor = (currentcolor+1)%colors.Length;
 		colors [currentcolor].SetActive (true);
-		player.currentShape = (Shape)currentcolor;
+
 	}
 }
