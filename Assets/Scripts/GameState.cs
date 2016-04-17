@@ -13,6 +13,9 @@ public class GameState : MonoBehaviour {
 	[HideInInspector]
 	public Main main;
 
+	[HideInInspector]
+	public UIController UI;
+
 	public Bullet bulletPrefab;
 
 	public float playerBulletFrequency = 0.2f;
