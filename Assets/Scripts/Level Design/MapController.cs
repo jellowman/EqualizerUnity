@@ -11,7 +11,7 @@ public class MapController : MonoBehaviour {
 	} 
 
 	public static void spawn(GameObject person) {
-		
+		//WaitForSeconds
 		if (person != null) {
 			person.transform.position = Spawner.spawnpoints [counter];
 			counter = (counter + 1) % Spawner.spawnpoints.Length;

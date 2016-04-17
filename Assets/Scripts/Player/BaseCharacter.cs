@@ -48,6 +48,8 @@ public class BaseCharacter : MonoBehaviour
 		if (Time.time - spawnTime > invulnerableTime) {
 			currentDamange--;
 			if (currentDamange <= 0) {
+                spawnTime = Time.time;
+				Debug.Log (currentShape.ToString () + " Died");
 				if (this is PlayerCharacter)
 					GameState.gameState.main.removePlayer (this.gameObject);
 				if (this is Enemy) {
