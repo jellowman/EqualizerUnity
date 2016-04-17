@@ -16,7 +16,7 @@ public class Enemy : BaseCharacter {
 		BaseCharacter target = null;
 
 		foreach (BaseCharacter bc in targets) {
-			if (!(bc.Equals(this))) {
+			if (!(CompareTag(bc.tag))) {
 				double dist = Mathf.Sqrt ((bc.transform.position.x - this.transform.position.x) + (bc.transform.position.y - this.transform.position.y));
 				if (dist < max) {
 					max = dist;
@@ -25,9 +25,13 @@ public class Enemy : BaseCharacter {
 			}
 		}
 
-		movex = target.transform.position.x - transform.position.x;
-		movey = target.transform.position.y - transform.position.y;
-
+		if (target != null) {
+			movex = target.transform.position.x - transform.position.x;
+			movey = target.transform.position.y - transform.position.y;
+		} else {
+			movex = 0;
+			movey = 0;
+		}
 		rigidBody.velocity = new Vector2 (movex, movey);
 		rigidBody.velocity = rigidBody.velocity.normalized * PlayerSpeed;
 
