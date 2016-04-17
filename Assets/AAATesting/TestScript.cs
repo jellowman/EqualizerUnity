@@ -19,7 +19,7 @@ public class TestScript : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.O)) {
-			main.spawnPlayer ();
+			//main.removePlayer ();
 		}
 	}
 }
