@@ -3,11 +3,6 @@ using System.Collections;
 
 public class Enemy : BaseCharacter {
 	
-	// Use this for initialization
-	void Start () {
-	
-	}
-
 	void FixedUpdate() {
 		BaseCharacter[] targets = GameObject.FindObjectsOfType<BaseCharacter> ();
 		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Wall");
@@ -49,10 +44,4 @@ public class Enemy : BaseCharacter {
 		Shoot();
 	}
 
-
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
