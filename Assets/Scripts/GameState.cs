@@ -18,6 +18,7 @@ public class GameState : MonoBehaviour {
 
 	public Bullet bulletPrefab;
 
+	public float winPercentage = 0.8f;
 	public float playerBulletFrequency = 0.2f;
 	public float enemyBulletFrequency = 0.5f;
 	public float PlayerSpeed = 3f;
