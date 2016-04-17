@@ -12,10 +12,12 @@ public enum Shape { Cirlce, Square, Triangle};
 public class BaseCharacter : MonoBehaviour 
 {
 	//The bulletFreqency is how often it is fired, lower number means more bullets. 
-	public const float bulletFrequency = 0.2f;
-	public const float PlayerSpeed = 3f;
-	public const float BulletSpeed = 12f;
-	private const int maxDamage = 5;
+	public float bulletFrequency = 0.2f;
+	public float PlayerSpeed = 3f;
+	public float BulletSpeed = 12f;
+	private int maxDamage = 5;
+
+	private float invulnerableTime = 2;
 
 	protected float movex = 0f;
 	protected float movey = 0f;
@@ -26,6 +28,8 @@ public class BaseCharacter : MonoBehaviour
 
 	private int currentDamange = 1;
 
+	private float spawnTime;
+
 	public Shape currentShape; 
 
 	/// <summary>
@@ -35,6 +39,7 @@ public class BaseCharacter : MonoBehaviour
 	public Vector2 lastDirection;
 
  	void Awake() {
+		spawnTime = Time.time;
 		rigidBody = this.GetComponent<Rigidbody2D>();
 		lastDirection = new Vector2 (1, 0);
 
@@ -42,13 +47,15 @@ public class BaseCharacter : MonoBehaviour
 
 	public void TakeDamage()
 	{
-		currentDamange--;
-		if (currentDamange <= 0) {
-			Debug.Log (currentShape.ToString() + " Died");
-			if(this is PlayerCharacter)
-				GameState.gameState.main.removePlayer (this.gameObject);
-			if(this is Enemy)
-				GameState.gameState.main.removeEnemy (this.gameObject);
+		if (Time.time - spawnTime > invulnerableTime) {
+			currentDamange--;
+			if (currentDamange <= 0) {
+				Debug.Log (currentShape.ToString () + " Died");
+				if (this is PlayerCharacter)
+					GameState.gameState.main.removePlayer (this.gameObject);
+				if (this is Enemy)
+					GameState.gameState.main.removeEnemy (this.gameObject);
+			}
 		}
 	}
 
