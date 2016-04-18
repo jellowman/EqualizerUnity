@@ -6,6 +6,7 @@ public class Enemy : BaseCharacter {
 	//if true, we're stuck and need to avoid something
 	bool avoid = false;
 	bool needAvoidVector = false;
+	float avoidStart = 0f;
 
 	void FixedUpdate() {
 		BaseCharacter[] targets = GameObject.FindObjectsOfType<BaseCharacter> ();
@@ -59,7 +60,6 @@ public class Enemy : BaseCharacter {
 		//get current vector
 		float current = rigidBody.velocity.magnitude;
 
-		float avoidStart = 0f;
 		//check if stuck (or close enough)
 		if (current < (temp.magnitude / 4) && !avoid){
 			//flag that we need to avoid something
