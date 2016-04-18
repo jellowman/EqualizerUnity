@@ -10,17 +10,24 @@ public class GameState : MonoBehaviour {
 
 	public static GameState gameState;
 
+	[HideInInspector]
 	public Main main;
 
-	public GameObject playerblue;
-	public GameObject playergreen;
-	public GameObject playerred;
-
-	public GameObject AI;
-
-	public int maxEnemyCount = 10;
+	[HideInInspector]
+	public UIController UI;
 
 	public Bullet bulletPrefab;
+
+	public float winPercentage = 0.8f;
+	public float playerBulletFrequency = 0.2f;
+	public float enemyBulletFrequency = 0.5f;
+	public float PlayerSpeed = 3f;
+	public float BulletSpeed = 12f;
+	public int maxDamage = 5;
+	public float invulnerableTime = 2;
+
+	[HideInInspector]
+	public int score = 0;
 
 	[HideInInspector]
 	public int killCount;
@@ -30,9 +37,12 @@ public class GameState : MonoBehaviour {
 
 	void Awake() 
 	{
-		DontDestroyOnLoad (transform.gameObject);
-		main = GameObject.FindObjectOfType<Main> ();
-		gameState = this;
+		if (gameState == null) {
+			DontDestroyOnLoad (transform.gameObject);
+			gameState = this;
+		} else {
+			Destroy (this.gameObject);
+		}
 	}
 
 	public void initializeSinglePlayer()

@@ -24,6 +24,8 @@ public class UIController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+		GameState.gameState.UI = this;
+
         maxNumShapes = 10;
         offset = 0.5f;
         reDrawFrame();

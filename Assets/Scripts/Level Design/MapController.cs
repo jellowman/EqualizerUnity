@@ -11,9 +11,16 @@ public class MapController : MonoBehaviour {
 	} 
 
 	public static void spawn(GameObject person) {
-		
+		//WaitForSeconds
 		if (person != null) {
 			person.transform.position = Spawner.spawnpoints [counter];
+			float random = Random.value;
+
+			Vector3 position = person.transform.position;
+			position.x += Random.value / 100;
+			position.y += Random.value / 100;
+			person.transform.position = position;
+
 			counter = (counter + 1) % Spawner.spawnpoints.Length;
 		} else {
 			Debug.Log ("The object to be spawned is null.");

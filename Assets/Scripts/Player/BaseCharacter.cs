@@ -11,13 +11,11 @@ public enum Shape { Cirlce, Square, Triangle};
 [RequireComponent (typeof (Rigidbody2D))]
 public class BaseCharacter : MonoBehaviour 
 {
-	//The bulletFreqency is how often it is fired, lower number means more bullets. 
-	public float bulletFrequency = 0.2f;
-	public float PlayerSpeed = 3f;
-	public float BulletSpeed = 12f;
-	private int maxDamage = 5;
+	public float PlayerSpeed { get { return GameState.gameState.PlayerSpeed; }  }
+	public float BulletSpeed { get { return GameState.gameState.BulletSpeed; }  }
+	private int maxDamage { get { return GameState.gameState.maxDamage; }  }
 
-	private float invulnerableTime = 2;
+	private float invulnerableTime { get { return GameState.gameState.invulnerableTime; }  }
 
 	protected float movex = 0f;
 	protected float movey = 0f;
@@ -45,28 +43,40 @@ public class BaseCharacter : MonoBehaviour
 
 	}
 
-	public void TakeDamage()
+	public void TakeDamage(bool damageFromPlayer = false)
 	{
 		if (Time.time - spawnTime > invulnerableTime) {
 			currentDamange--;
 			if (currentDamange <= 0) {
+                spawnTime = Time.time;
 				Debug.Log (currentShape.ToString () + " Died");
 				if (this is PlayerCharacter)
 					GameState.gameState.main.removePlayer (this.gameObject);
-				if (this is Enemy)
+				if (this is Enemy) {
+					if (damageFromPlayer) {
+						GameState.gameState.score++;
+					}
 					GameState.gameState.main.removeEnemy (this.gameObject);
+				}
 			}
 		}
 	}
 
 	public void Shoot()
 	{
-		if (Time.time - lastShotTime > bulletFrequency) {
-			lastShotTime = Time.time;
-			Bullet bulletInstance;
-			bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
-			bulletInstance.shotFrom = currentShape;
-			bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
+		if (Time.time - spawnTime > invulnerableTime*7) {
+			float bulletFrequency;
+			if (this is Enemy)
+				bulletFrequency = GameState.gameState.enemyBulletFrequency;
+			else
+				bulletFrequency = GameState.gameState.playerBulletFrequency;
+			if (Time.time - lastShotTime > bulletFrequency) {
+				lastShotTime = Time.time;
+				Bullet bulletInstance;
+				bulletInstance = Instantiate (GameState.gameState.bulletPrefab, this.transform.position, GameState.gameState.bulletPrefab.transform.rotation) as Bullet;
+				bulletInstance.shotFrom = this;
+				bulletInstance.GetComponent<Rigidbody2D> ().velocity = lastDirection.normalized * BulletSpeed;
+			}
 		}
 	}
 

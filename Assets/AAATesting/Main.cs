@@ -18,7 +18,7 @@ public class Main : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		GameState.gameState.main = GameObject.FindObjectOfType<Main> ();
 		//TODO: Getobjects from gamestate
 		ui = uiobject.GetComponent<UIController>();
 		//player = GameState.gameState.getPlayer ();
@@ -48,14 +48,14 @@ public class Main : MonoBehaviour {
 
 			float[] spawnrates = new float[2];
 
-			/*
+			
 			if (totalenemies != 0) {
 				spawnrates [0] = ((float)colorcount [0]) / totalenemies;
 				spawnrates [1] = ((float)colorcount [1]) / totalenemies + spawnrates [0];
-			}*/
+			}
 
-			spawnrates [0] = 0.33333f;
-			spawnrates [1] = 0.66666f;
+			//spawnrates [0] = 0.33333f;
+			//spawnrates [1] = 0.66666f;
 
 			float random = Random.value;
 
@@ -100,7 +100,6 @@ public class Main : MonoBehaviour {
 	public void removeEnemy(GameObject enemy) {
 		
 		int color = enemy.GetComponent<Enemy> ().getColor();
-		Debug.Log("Enemy Color: " + color);
 		colorcount[color]--;
 
 		if (color == 0)
