@@ -19,16 +19,21 @@ public class GameOver : MonoBehaviour {
 
 	public void EndGame()
 	{
+		AudioFlipper.audiosources = new AudioSource[0];
+		AudioFlipper.currentaudioplayer = 0;
+		Spawner.spawnpoints = new Vector3[0];
 		gameOverText.SetActive (true);
 	}
 
 	public void Restart()
 	{
+		GameState.gameState.score = 0;
 		Application.LoadLevel (Application.loadedLevelName);
 	}
 
 	public void ReturnToMainMenu()
 	{
+		GameState.gameState.score = 0;
 		Application.LoadLevel ("MainMenu");
 	}
 }
