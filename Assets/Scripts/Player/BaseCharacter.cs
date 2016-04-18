@@ -64,7 +64,7 @@ public class BaseCharacter : MonoBehaviour
 
 	public void Shoot()
 	{
-		if (Time.time - spawnTime > invulnerableTime) {
+		if (Time.time - spawnTime > invulnerableTime*7) {
 			float bulletFrequency;
 			if (this is Enemy)
 				bulletFrequency = GameState.gameState.enemyBulletFrequency;
