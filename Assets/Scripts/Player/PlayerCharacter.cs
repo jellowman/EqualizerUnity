@@ -11,17 +11,18 @@ public class PlayerCharacter : BaseCharacter {
 	/// This method takes care of movement
 	/// </summary>
 	void FixedUpdate() {
-		 
-		movex = Input.GetAxis (horizontalAxis);
-		movey = Input.GetAxis (verticalAxis);
+        if (!GameState.gameState.gameOver) {
+            movex = Input.GetAxis(horizontalAxis);
+            movey = Input.GetAxis(verticalAxis);
 
-		rigidBody.velocity = new Vector2 (movex * PlayerSpeed, movey * PlayerSpeed);
+            rigidBody.velocity = new Vector2(movex * PlayerSpeed, movey * PlayerSpeed);
 
-		if (movex != 0 || movey != 0) {
-			lastDirection = new Vector2 (movex, movey);
-		}
+            if (movex != 0 || movey != 0) {
+                lastDirection = new Vector2(movex, movey);
+            }
 
-		Shoot();
+            Shoot();
+        }
 	}
 
 	/// <summary>

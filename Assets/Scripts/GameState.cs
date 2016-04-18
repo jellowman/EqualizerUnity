@@ -10,6 +10,8 @@ public class GameState : MonoBehaviour {
 
 	public static GameState gameState;
 
+    public static int highScore = 0; 
+
 	[HideInInspector]
 	public Main main;
 
@@ -35,6 +37,9 @@ public class GameState : MonoBehaviour {
 	[HideInInspector]
 	public int numPlayers;
 
+    [HideInInspector]
+    public bool gameOver = false;
+
 	void Awake() 
 	{
 		if (gameState == null) {
@@ -53,11 +58,5 @@ public class GameState : MonoBehaviour {
 	public void initializeMultiPlayer()
 	{
 		numPlayers = 2;
-	}
-
-	public void gameOver()
-	{
-		Application.LoadLevel("MainMenu");
-		killCount = 0;
 	}
 }
