@@ -13,8 +13,12 @@ public class GameState : MonoBehaviour {
 	[HideInInspector]
 	public Main main;
 
+	[HideInInspector]
+	public UIController UI;
+
 	public Bullet bulletPrefab;
 
+	public float winPercentage = 0.8f;
 	public float playerBulletFrequency = 0.2f;
 	public float enemyBulletFrequency = 0.5f;
 	public float PlayerSpeed = 3f;
