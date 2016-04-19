@@ -15,6 +15,11 @@ public class GameOver : MonoBehaviour {
 	private float maxNumShapes { get { return (float)GameState.gameState.UI.maxNumShapes; }}
 	private float winPercentage { get { return GameState.gameState.winPercentage; }} 
 
+
+	void Awake()
+	{
+		gameOverText.SetActive (false);
+	}
 	// Update is called once per frame
 	void Update () {
         if (numCircles / maxNumShapes >= winPercentage || numTriangles / maxNumShapes >= winPercentage || numSquares / maxNumShapes >= winPercentage) {
@@ -32,8 +37,10 @@ public class GameOver : MonoBehaviour {
         if (GameState.gameState.score > GameState.highScore) {
             GameState.highScore = GameState.gameState.score;
         }
+		try {
         score.text = GameState.gameState.score.ToString();
         highScore.text = GameState.highScore.ToString();
+		} catch (System.Exception e) { }
 		gameOverText.SetActive (true);
 	}
 

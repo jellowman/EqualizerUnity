@@ -42,6 +42,8 @@ public class GameState : MonoBehaviour {
 
 	void Awake() 
 	{
+		highScore = 0;
+		score = 0;
 		if (gameState == null) {
 			DontDestroyOnLoad (transform.gameObject);
 			gameState = this;

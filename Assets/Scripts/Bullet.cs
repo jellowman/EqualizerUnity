@@ -5,6 +5,16 @@ public class Bullet : MonoBehaviour
 {
 	public BaseCharacter shotFrom;
 
+	void Awake()
+	{
+		StartCoroutine (TimeOut ());
+	}
+
+	IEnumerator TimeOut() {
+		yield return new WaitForSeconds (1);
+		Destroy (this.gameObject);
+	}
+
 	void OnTriggerEnter2D(Collider2D coll) {
 		BaseCharacter player = coll.gameObject.GetComponent<BaseCharacter> ();
 		if (player == null) {
