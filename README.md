@@ -9,5 +9,5 @@ The game was made in approximately 60 hours in Unity 5.3
 Will Booker<br>
 Carmen Chilson<br>
 Trevor Fisher<br>
-Eric Garrison
+Eric Garrison<br>
 Ben Spriggs
